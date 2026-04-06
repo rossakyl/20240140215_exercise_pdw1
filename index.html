@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+
+<meta charset="UTF-8">
+<title>Chara Beauty</title>
+
+<link rel="stylesheet" href="style.css">
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&family=Playfair+Display:wght@500&display=swap" rel="stylesheet">
+
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+
+<header class="navbar">
+
+<div class="logo">Chara Beauty</div>
+
+<nav>
+<a href="#home">Home</a>
+<a href="#about">Tentang Kami</a>
+<a href="#produk">Menu</a>
+<a href="#kontak">Kontak</a>
+</nav>
+
+<div class="icons">
+
+<span onclick="toggleSearch()">🔍</span>
+
+<span onclick="toggleCart()">
+🛒 <span id="cartCount">0</span>
+</span>
+
+</div>
+
+</header>
+
+
+<!-- SEARCH BOX -->
+
+<div class="search-box" id="searchBox">
+
+<input type="text" id="searchInput" placeholder="Cari produk...">
+
+<button onclick="cariProduk()">Cari</button>
+
+<button onclick="closeSearch()">Tutup</button>
+
+</div>
+
+
+
+<!-- CART BOX -->
+
+<div class="cart-box" id="cartBox">
+
+<h3>Keranjang</h3>
+
+<div id="cartText">
+Keranjang kosong
+</div>
+
+<button onclick="closeCart()">Tutup</button>
+
+</div>
+
+
+
+<!-- HERO -->
+
+<section class="hero" id="home">
+
+<h1>Chara Beauty</h1>
+
+<p>
+Temukan berbagai produk kecantikan terbaik untuk menunjang penampilanmu.
+</p>
+
+<button onclick="scrollProduk()">Lihat Produk</button>
+
+</section>
+
+
+
+<!-- ABOUT -->
+
+<section class="about" id="about">
+
+<h2>Tentang Kami</h2>
+
+<p>
+Chara Beauty adalah toko kecantikan yang menyediakan berbagai produk skincare dan makeup berkualitas.
+</p>
+
+<p>
+Kami menghadirkan produk pilihan yang aman dan terpercaya untuk membantu meningkatkan rasa percaya diri setiap pelanggan.
+</p>
+
+</section>
+
+
+
+<!-- PRODUK -->
+
+<section class="produk" id="produk">
+
+<h2>Menu Produk</h2>
+
+<div class="produk-container">
+
+
+<div class="card">
+
+<img src="images/npure.jpg">
+
+<h3>NPURE CICA PAD</h3>
+
+<p>Rp 90.000</p>
+
+<button onclick="beliProduk('NPURE CICA PAD',90000)">Beli</button>
+
+</div>
+
+
+
+<div class="card">
+
+<img src="images/maybelline.jpg">
+
+<h3>MAYBELLINE VINYL INK</h3>
+
+<p>Rp 125.500</p>
+
+<button onclick="beliProduk('MAYBELLINE VINYL INK',125500)">Beli</button>
+
+</div>
+
+
+
+<div class="card">
+
+<img src="images/skintific.jpg">
+
+<h3>SKINTIFIC MOISTURIZER</h3>
+
+<p>Rp 135.000</p>
+
+<button onclick="beliProduk('SKINTIFIC MOISTURIZER',135000)">Beli</button>
+
+</div>
+
+
+
+<div class="card">
+
+<img src="images/wardah.jpg">
+
+<h3>WARDAH LIP CREAM</h3>
+
+<p>Rp 65.000</p>
+
+<button onclick="beliProduk('WARDAH LIP CREAM',65000)">Beli</button>
+
+</div>
+
+
+
+<div class="card">
+
+<img src="images/emina.jpg">
+
+<h3>EMINA LIP TINT</h3>
+
+<p>Rp 45.000</p>
+
+<button onclick="beliProduk('EMINA LIP TINT',45000)">Beli</button>
+
+</div>
+
+
+
+<div class="card">
+
+<img src="images/azarine.jpg">
+
+<h3>AZARINE SUNSCREEN</h3>
+
+<p>Rp 70.000</p>
+
+<button onclick="beliProduk('AZARINE SUNSCREEN',70000)">Beli</button>
+
+</div>
+
+
+
+<div class="card">
+
+<img src="images/somethinc.jpg">
+
+<h3>SOMETHINC SERUM</h3>
+
+<p>Rp 120.000</p>
+
+<button onclick="beliProduk('SOMETHINC SERUM',120000)">Beli</button>
+
+</div>
+
+
+
+<div class="card">
+
+<img src="images/skin1004.jpg">
+
+<h3>SKIN1004 TONER</h3>
+
+<p>Rp 150.000</p>
+
+<button onclick="beliProduk('SKIN1004 TONER',150000)">Beli</button>
+
+</div>
+
+
+</div>
+
+</section>
+
+
+
+<!-- KONTAK -->
+
+<section class="kontak" id="kontak">
+
+<h2>Kontak</h2>
+
+<p>Email : charabeauty@gmail.com</p>
+
+<p>Instagram : @chara_beauty</p>
+
+<p>WhatsApp : 08123456789</p>
+
+</section>
+
+
+
+<!-- FOOTER -->
+
+<footer>
+
+<p>© 2026 Chara Beauty</p>
+
+</footer>
+
+
+
+<script>
+
+
+let keranjang = [];
+
+
+
+function beliProduk(nama,harga){
+
+keranjang.push({
+nama:nama,
+harga:harga
+});
+
+alert("Produk " + nama + " berhasil ditambahkan ke keranjang!");
+
+updateCart();
+
+}
+
+
+
+function updateCart(){
+
+let cartText = document.getElementById("cartText");
+
+let cartCount = document.getElementById("cartCount");
+
+cartCount.innerText = keranjang.length;
+
+
+
+if(keranjang.length===0){
+
+cartText.innerHTML="Keranjang kosong";
+
+return;
+
+}
+
+
+
+let html="";
+
+let total=0;
+
+
+
+keranjang.forEach(function(item,index){
+
+total+=item.harga;
+
+html+=`
+<p>
+${item.nama} - Rp ${item.harga}
+<button onclick="hapusProduk(${index})">❌</button>
+</p>
+`;
+
+});
+
+
+
+html+="<hr>";
+
+html+="<b>Total: Rp "+total+"</b>";
+
+
+
+cartText.innerHTML=html;
+
+}
+
+
+
+function hapusProduk(index){
+
+keranjang.splice(index,1);
+
+updateCart();
+
+}
+
+
+
+function scrollProduk(){
+
+document.getElementById("produk").scrollIntoView({
+behavior:"smooth"
+});
+
+}
+
+
+
+function toggleSearch(){
+
+document.getElementById("searchBox").style.display="block";
+
+}
+
+function closeSearch(){
+
+document.getElementById("searchBox").style.display="none";
+
+}
+
+
+
+function toggleCart(){
+
+document.getElementById("cartBox").style.display="block";
+
+updateCart();
+
+}
+
+function closeCart(){
+
+document.getElementById("cartBox").style.display="none";
+
+}
+
+
+
+function cariProduk(){
+
+let input=document.getElementById("searchInput").value.toLowerCase();
+
+let produk=document.querySelectorAll(".card");
+
+let ditemukan=false;
+
+
+
+produk.forEach(function(item){
+
+let namaProduk=item.innerText.toLowerCase();
+
+if(namaProduk.includes(input)){
+
+item.scrollIntoView({behavior:"smooth"});
+
+ditemukan=true;
+
+}
+
+});
+
+
+
+if(!ditemukan){
+
+alert("Produk tidak ditemukan");
+
+}
+
+}
+
+
+
+document.getElementById("searchInput").addEventListener("keypress",function(event){
+
+if(event.key==="Enter"){
+
+cariProduk();
+
+}
+
+});
+
+
+</script>
+
+
+</body>
+</html>
